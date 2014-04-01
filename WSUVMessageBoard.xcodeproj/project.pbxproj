@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F732429718EB8047004227E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F732429618EB8047004227E7 /* Foundation.framework */; };
+		F732429918EB8047004227E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F732429818EB8047004227E7 /* CoreGraphics.framework */; };
+		F732429B18EB8047004227E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F732429A18EB8047004227E7 /* UIKit.framework */; };
+		F73242A118EB8047004227E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F732429F18EB8047004227E7 /* InfoPlist.strings */; };
+		F73242A318EB8047004227E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F73242A218EB8047004227E7 /* main.m */; };
+		F73242A718EB8047004227E7 /* MessageAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F73242A618EB8047004227E7 /* MessageAppDelegate.m */; };
+		F73242AA18EB8047004227E7 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F73242A818EB8047004227E7 /* Main_iPhone.storyboard */; };
+		F73242AD18EB8047004227E7 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F73242AB18EB8047004227E7 /* Main_iPad.storyboard */; };
+		F73242B018EB8047004227E7 /* MessageMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F73242AF18EB8047004227E7 /* MessageMasterViewController.m */; };
+		F73242B318EB8047004227E7 /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F73242B218EB8047004227E7 /* MessageDetailViewController.m */; };
+		F73242B518EB8047004227E7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F73242B418EB8047004227E7 /* Images.xcassets */; };
+		F73242BC18EB8047004227E7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73242BB18EB8047004227E7 /* XCTest.framework */; };
+		F73242BD18EB8047004227E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F732429618EB8047004227E7 /* Foundation.framework */; };
+		F73242BE18EB8047004227E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F732429A18EB8047004227E7 /* UIKit.framework */; };
+		F73242C618EB8047004227E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F73242C418EB8047004227E7 /* InfoPlist.strings */; };
+		F73242C818EB8047004227E7 /* WSUVMessageBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F73242C718EB8047004227E7 /* WSUVMessageBoardTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F73242BF18EB8047004227E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F732428B18EB8047004227E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F732429218EB8047004227E7;
+			remoteInfo = WSUVMessageBoard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F732429318EB8047004227E7 /* WSUVMessageBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WSUVMessageBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F732429618EB8047004227E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F732429818EB8047004227E7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F732429A18EB8047004227E7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F732429E18EB8047004227E7 /* WSUVMessageBoard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WSUVMessageBoard-Info.plist"; sourceTree = "<group>"; };
+		F73242A018EB8047004227E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F73242A218EB8047004227E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F73242A418EB8047004227E7 /* WSUVMessageBoard-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WSUVMessageBoard-Prefix.pch"; sourceTree = "<group>"; };
+		F73242A518EB8047004227E7 /* MessageAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageAppDelegate.h; sourceTree = "<group>"; };
+		F73242A618EB8047004227E7 /* MessageAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageAppDelegate.m; sourceTree = "<group>"; };
+		F73242A918EB8047004227E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		F73242AC18EB8047004227E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		F73242AE18EB8047004227E7 /* MessageMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageMasterViewController.h; sourceTree = "<group>"; };
+		F73242AF18EB8047004227E7 /* MessageMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageMasterViewController.m; sourceTree = "<group>"; };
+		F73242B118EB8047004227E7 /* MessageDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewController.h; sourceTree = "<group>"; };
+		F73242B218EB8047004227E7 /* MessageDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
+		F73242B418EB8047004227E7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F73242BA18EB8047004227E7 /* WSUVMessageBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WSUVMessageBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F73242BB18EB8047004227E7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		F73242C318EB8047004227E7 /* WSUVMessageBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WSUVMessageBoardTests-Info.plist"; sourceTree = "<group>"; };
+		F73242C518EB8047004227E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F73242C718EB8047004227E7 /* WSUVMessageBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WSUVMessageBoardTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F732429018EB8047004227E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F732429918EB8047004227E7 /* CoreGraphics.framework in Frameworks */,
+				F732429B18EB8047004227E7 /* UIKit.framework in Frameworks */,
+				F732429718EB8047004227E7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F73242B718EB8047004227E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F73242BC18EB8047004227E7 /* XCTest.framework in Frameworks */,
+				F73242BE18EB8047004227E7 /* UIKit.framework in Frameworks */,
+				F73242BD18EB8047004227E7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F732428A18EB8047004227E7 = {
+			isa = PBXGroup;
+			children = (
+				F732429C18EB8047004227E7 /* WSUVMessageBoard */,
+				F73242C118EB8047004227E7 /* WSUVMessageBoardTests */,
+				F732429518EB8047004227E7 /* Frameworks */,
+				F732429418EB8047004227E7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F732429418EB8047004227E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F732429318EB8047004227E7 /* WSUVMessageBoard.app */,
+				F73242BA18EB8047004227E7 /* WSUVMessageBoardTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F732429518EB8047004227E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F732429618EB8047004227E7 /* Foundation.framework */,
+				F732429818EB8047004227E7 /* CoreGraphics.framework */,
+				F732429A18EB8047004227E7 /* UIKit.framework */,
+				F73242BB18EB8047004227E7 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F732429C18EB8047004227E7 /* WSUVMessageBoard */ = {
+			isa = PBXGroup;
+			children = (
+				F73242A518EB8047004227E7 /* MessageAppDelegate.h */,
+				F73242A618EB8047004227E7 /* MessageAppDelegate.m */,
+				F73242A818EB8047004227E7 /* Main_iPhone.storyboard */,
+				F73242AB18EB8047004227E7 /* Main_iPad.storyboard */,
+				F73242AE18EB8047004227E7 /* MessageMasterViewController.h */,
+				F73242AF18EB8047004227E7 /* MessageMasterViewController.m */,
+				F73242B118EB8047004227E7 /* MessageDetailViewController.h */,
+				F73242B218EB8047004227E7 /* MessageDetailViewController.m */,
+				F73242B418EB8047004227E7 /* Images.xcassets */,
+				F732429D18EB8047004227E7 /* Supporting Files */,
+			);
+			path = WSUVMessageBoard;
+			sourceTree = "<group>";
+		};
+		F732429D18EB8047004227E7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F732429E18EB8047004227E7 /* WSUVMessageBoard-Info.plist */,
+				F732429F18EB8047004227E7 /* InfoPlist.strings */,
+				F73242A218EB8047004227E7 /* main.m */,
+				F73242A418EB8047004227E7 /* WSUVMessageBoard-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F73242C118EB8047004227E7 /* WSUVMessageBoardTests */ = {
+			isa = PBXGroup;
+			children = (
+				F73242C718EB8047004227E7 /* WSUVMessageBoardTests.m */,
+				F73242C218EB8047004227E7 /* Supporting Files */,
+			);
+			path = WSUVMessageBoardTests;
+			sourceTree = "<group>";
+		};
+		F73242C218EB8047004227E7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F73242C318EB8047004227E7 /* WSUVMessageBoardTests-Info.plist */,
+				F73242C418EB8047004227E7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F732429218EB8047004227E7 /* WSUVMessageBoard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F73242CB18EB8047004227E7 /* Build configuration list for PBXNativeTarget "WSUVMessageBoard" */;
+			buildPhases = (
+				F732428F18EB8047004227E7 /* Sources */,
+				F732429018EB8047004227E7 /* Frameworks */,
+				F732429118EB8047004227E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WSUVMessageBoard;
+			productName = WSUVMessageBoard;
+			productReference = F732429318EB8047004227E7 /* WSUVMessageBoard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F73242B918EB8047004227E7 /* WSUVMessageBoardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F73242CE18EB8047004227E7 /* Build configuration list for PBXNativeTarget "WSUVMessageBoardTests" */;
+			buildPhases = (
+				F73242B618EB8047004227E7 /* Sources */,
+				F73242B718EB8047004227E7 /* Frameworks */,
+				F73242B818EB8047004227E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F73242C018EB8047004227E7 /* PBXTargetDependency */,
+			);
+			name = WSUVMessageBoardTests;
+			productName = WSUVMessageBoardTests;
+			productReference = F73242BA18EB8047004227E7 /* WSUVMessageBoardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F732428B18EB8047004227E7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Message;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = WSUV;
+				TargetAttributes = {
+					F73242B918EB8047004227E7 = {
+						TestTargetID = F732429218EB8047004227E7;
+					};
+				};
+			};
+			buildConfigurationList = F732428E18EB8047004227E7 /* Build configuration list for PBXProject "WSUVMessageBoard" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F732428A18EB8047004227E7;
+			productRefGroup = F732429418EB8047004227E7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F732429218EB8047004227E7 /* WSUVMessageBoard */,
+				F73242B918EB8047004227E7 /* WSUVMessageBoardTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F732429118EB8047004227E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F73242AD18EB8047004227E7 /* Main_iPad.storyboard in Resources */,
+				F73242B518EB8047004227E7 /* Images.xcassets in Resources */,
+				F73242AA18EB8047004227E7 /* Main_iPhone.storyboard in Resources */,
+				F73242A118EB8047004227E7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F73242B818EB8047004227E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F73242C618EB8047004227E7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F732428F18EB8047004227E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F73242A718EB8047004227E7 /* MessageAppDelegate.m in Sources */,
+				F73242A318EB8047004227E7 /* main.m in Sources */,
+				F73242B018EB8047004227E7 /* MessageMasterViewController.m in Sources */,
+				F73242B318EB8047004227E7 /* MessageDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F73242B618EB8047004227E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F73242C818EB8047004227E7 /* WSUVMessageBoardTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F73242C018EB8047004227E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F732429218EB8047004227E7 /* WSUVMessageBoard */;
+			targetProxy = F73242BF18EB8047004227E7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F732429F18EB8047004227E7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F73242A018EB8047004227E7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F73242A818EB8047004227E7 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F73242A918EB8047004227E7 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		F73242AB18EB8047004227E7 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F73242AC18EB8047004227E7 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		F73242C418EB8047004227E7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F73242C518EB8047004227E7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F73242C918EB8047004227E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F73242CA18EB8047004227E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F73242CC18EB8047004227E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WSUVMessageBoard/WSUVMessageBoard-Prefix.pch";
+				INFOPLIST_FILE = "WSUVMessageBoard/WSUVMessageBoard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F73242CD18EB8047004227E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WSUVMessageBoard/WSUVMessageBoard-Prefix.pch";
+				INFOPLIST_FILE = "WSUVMessageBoard/WSUVMessageBoard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F73242CF18EB8047004227E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WSUVMessageBoard.app/WSUVMessageBoard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WSUVMessageBoard/WSUVMessageBoard-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "WSUVMessageBoardTests/WSUVMessageBoardTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		F73242D018EB8047004227E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WSUVMessageBoard.app/WSUVMessageBoard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WSUVMessageBoard/WSUVMessageBoard-Prefix.pch";
+				INFOPLIST_FILE = "WSUVMessageBoardTests/WSUVMessageBoardTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F732428E18EB8047004227E7 /* Build configuration list for PBXProject "WSUVMessageBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F73242C918EB8047004227E7 /* Debug */,
+				F73242CA18EB8047004227E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F73242CB18EB8047004227E7 /* Build configuration list for PBXNativeTarget "WSUVMessageBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F73242CC18EB8047004227E7 /* Debug */,
+				F73242CD18EB8047004227E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F73242CE18EB8047004227E7 /* Build configuration list for PBXNativeTarget "WSUVMessageBoardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F73242CF18EB8047004227E7 /* Debug */,
+				F73242D018EB8047004227E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F732428B18EB8047004227E7 /* Project object */;
+}
