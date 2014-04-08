@@ -23,6 +23,7 @@
 		F73242BE18EB8047004227E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F732429A18EB8047004227E7 /* UIKit.framework */; };
 		F73242C618EB8047004227E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F73242C418EB8047004227E7 /* InfoPlist.strings */; };
 		F73242C818EB8047004227E7 /* WSUVMessageBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F73242C718EB8047004227E7 /* WSUVMessageBoardTests.m */; };
+		F7F0A9CE18F4A84400BBF7D5 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F0A9CD18F4A84400BBF7D5 /* Tweet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		F73242C318EB8047004227E7 /* WSUVMessageBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WSUVMessageBoardTests-Info.plist"; sourceTree = "<group>"; };
 		F73242C518EB8047004227E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F73242C718EB8047004227E7 /* WSUVMessageBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WSUVMessageBoardTests.m; sourceTree = "<group>"; };
+		F7F0A9CC18F4A84400BBF7D5 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		F7F0A9CD18F4A84400BBF7D5 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,8 @@
 				F73242AF18EB8047004227E7 /* MessageMasterViewController.m */,
 				F73242B118EB8047004227E7 /* MessageDetailViewController.h */,
 				F73242B218EB8047004227E7 /* MessageDetailViewController.m */,
+				F7F0A9CC18F4A84400BBF7D5 /* Tweet.h */,
+				F7F0A9CD18F4A84400BBF7D5 /* Tweet.m */,
 				F73242B418EB8047004227E7 /* Images.xcassets */,
 				F732429D18EB8047004227E7 /* Supporting Files */,
 			);
@@ -261,6 +266,7 @@
 			files = (
 				F73242A718EB8047004227E7 /* MessageAppDelegate.m in Sources */,
 				F73242A318EB8047004227E7 /* main.m in Sources */,
+				F7F0A9CE18F4A84400BBF7D5 /* Tweet.m in Sources */,
 				F73242B018EB8047004227E7 /* MessageMasterViewController.m in Sources */,
 				F73242B318EB8047004227E7 /* MessageDetailViewController.m in Sources */,
 			);
@@ -477,6 +483,7 @@
 				F73242CD18EB8047004227E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F73242CE18EB8047004227E7 /* Build configuration list for PBXNativeTarget "WSUVMessageBoardTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +492,7 @@
 				F73242D018EB8047004227E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
