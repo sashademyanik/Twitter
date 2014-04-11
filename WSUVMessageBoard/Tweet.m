@@ -17,42 +17,26 @@
 		self.isdeleted = NO;
 		self.tweet = @"";
 		self.date = [NSDate date];
-		self.tweetString = nil;
+		self.tweetAttributedString = nil;
 	}
 	return self;
 }
 
-#define kTweetId @"tweet_id"
-#define kUsername @"username"
-#define kIsDeleted @"isdeleted"
-#define kTweet @"tweet"
-#define kDate @"date"
-#define kTweetString @"tweetString"
-
--(id)initWithCoder:(NSCoder *)aDecoder{
+-(id)initWithTweetID:(NSInteger)tweet_ID
+            Username:(NSString*) username
+           //IsDeleted:(BOOL)isdeleted
+               Tweet:(NSString*)tweet
+                Date:(NSDate*) date{
     if (self = [super init]) {
-        self.tweet_id = [aDecoder decodeIntegerForKey:kTweetId];
-        self.username = [aDecoder decodeObjectForKey:kUsername];
-        self.isdeleted = [aDecoder decodeBoolForKey:kIsDeleted];
-        self.tweet = [aDecoder decodeObjectForKey:kTweet];
-        self.date = [aDecoder decodeObjectForKey:kDate];
-        self.tweetString = [aDecoder decodeObjectForKey:kTweetString];
-        
+        self.tweet_id = tweet_ID;
+		self.username = username;
+		//self.isdeleted = isdeleted;
+		self.tweet = tweet;
+		self.date = date;
     }
+    
     return self;
 }
 
--(void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeInteger:self.tweet_id forKey:kTweetId];
-    [aCoder encodeObject:self.username forKey:kUsername];
-    [aCoder encodeBool:self.isdeleted forKey:kIsDeleted];
-    
-}
-
--(id)copyWithZone:(NSZone *)zone{
-    Tweet *clone = [[[self class] alloc] init];
-    
-    return clone;
-}
 
 @end

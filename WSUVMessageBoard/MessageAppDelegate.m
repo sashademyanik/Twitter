@@ -7,6 +7,8 @@
 //
 
 #import "MessageAppDelegate.h"
+#import "AFHTTPSessionManager.h"
+#import "Tweet.h"
 
 @implementation MessageAppDelegate
 
@@ -46,6 +48,20 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(NSDate*)lastTweetDate{
+    NSDate *date;
+    if ([self.tweets count] == 0) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"PST"];
+        date = [dateFormatter dateFromString:@"1900-01-01 00:00:01"];
+    }else{
+        Tweet *tweet = [self.tweets objectAtIndex:0];
+        date = tweet.date;
+    }
+    return date;
 }
 
 @end

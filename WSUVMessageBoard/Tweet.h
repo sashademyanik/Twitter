@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Tweet : NSObject <NSCoding, NSCopying>
+@interface Tweet : NSObject //<NSCoding, NSCopying>
 
 @property (assign, nonatomic) NSInteger tweet_id;
 @property (copy, nonatomic) NSString *username;
 @property (nonatomic) BOOL isdeleted;
 @property (copy, nonatomic) NSString* tweet;
 @property (retain, nonatomic) NSDate* date;
-@property (copy, nonatomic) NSAttributedString* tweetString;
+@property (copy, nonatomic) NSAttributedString* tweetAttributedString;
 
 @end
