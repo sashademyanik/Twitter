@@ -17,4 +17,9 @@
 @property (retain, nonatomic) NSDate* date;
 @property (copy, nonatomic) NSAttributedString* tweetAttributedString;
 
+-(id)initWithTweetID:(NSInteger)tweet_ID
+            Username:(NSString*) username
+           IsDeleted:(BOOL)isdeleted
+               Tweet:(NSString*)tweet
+                Date:(NSDate*) date;
 @end

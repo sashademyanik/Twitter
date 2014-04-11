@@ -19,7 +19,9 @@
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
+        self.tweets = [[NSMutableArray alloc] init];
     }
+    self.tweets = [[NSMutableArray alloc] init];
     return YES;
 }
 							

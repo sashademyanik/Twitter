@@ -23,6 +23,8 @@
 		F73242BE18EB8047004227E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F732429A18EB8047004227E7 /* UIKit.framework */; };
 		F73242C618EB8047004227E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F73242C418EB8047004227E7 /* InfoPlist.strings */; };
 		F73242C818EB8047004227E7 /* WSUVMessageBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F73242C718EB8047004227E7 /* WSUVMessageBoardTests.m */; };
+		F795866318F8A037009A95D2 /* LoginTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F795866218F8A037009A95D2 /* LoginTableViewController.m */; };
+		F795866618F8A051009A95D2 /* AddTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F795866518F8A051009A95D2 /* AddTweetViewController.m */; };
 		F7D2420418F768E900E6305A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D241F218F768E900E6305A /* AFHTTPRequestOperation.m */; };
 		F7D2420518F768E900E6305A /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D241F418F768E900E6305A /* AFHTTPRequestOperationManager.m */; };
 		F7D2420618F768E900E6305A /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D241F618F768E900E6305A /* AFHTTPSessionManager.m */; };
@@ -76,6 +78,10 @@
 		F73242C318EB8047004227E7 /* WSUVMessageBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WSUVMessageBoardTests-Info.plist"; sourceTree = "<group>"; };
 		F73242C518EB8047004227E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F73242C718EB8047004227E7 /* WSUVMessageBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WSUVMessageBoardTests.m; sourceTree = "<group>"; };
+		F795866118F8A037009A95D2 /* LoginTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewController.h; sourceTree = "<group>"; };
+		F795866218F8A037009A95D2 /* LoginTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewController.m; sourceTree = "<group>"; };
+		F795866418F8A051009A95D2 /* AddTweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTweetViewController.h; sourceTree = "<group>"; };
+		F795866518F8A051009A95D2 /* AddTweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTweetViewController.m; sourceTree = "<group>"; };
 		F7D241F118F768E900E6305A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F7D241F218F768E900E6305A /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F7D241F318F768E900E6305A /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -181,6 +187,10 @@
 				F73242AF18EB8047004227E7 /* MessageMasterViewController.m */,
 				F73242B118EB8047004227E7 /* MessageDetailViewController.h */,
 				F73242B218EB8047004227E7 /* MessageDetailViewController.m */,
+				F795866118F8A037009A95D2 /* LoginTableViewController.h */,
+				F795866218F8A037009A95D2 /* LoginTableViewController.m */,
+				F795866418F8A051009A95D2 /* AddTweetViewController.h */,
+				F795866518F8A051009A95D2 /* AddTweetViewController.m */,
 				F7F0A9CC18F4A84400BBF7D5 /* Tweet.h */,
 				F7F0A9CD18F4A84400BBF7D5 /* Tweet.m */,
 				F7D2420D18F768F700E6305A /* UIKit+AFNetworking */,
@@ -373,6 +383,7 @@
 				F7D2420418F768E900E6305A /* AFHTTPRequestOperation.m in Sources */,
 				F7D2422218F768F700E6305A /* UIButton+AFNetworking.m in Sources */,
 				F7D2420718F768E900E6305A /* AFNetworkReachabilityManager.m in Sources */,
+				F795866618F8A051009A95D2 /* AddTweetViewController.m in Sources */,
 				F7D2422418F768F700E6305A /* UIProgressView+AFNetworking.m in Sources */,
 				F7D2420C18F768E900E6305A /* AFURLSessionManager.m in Sources */,
 				F7D2420A18F768E900E6305A /* AFURLRequestSerialization.m in Sources */,
@@ -382,6 +393,7 @@
 				F73242A318EB8047004227E7 /* main.m in Sources */,
 				F7D2422318F768F700E6305A /* UIImageView+AFNetworking.m in Sources */,
 				F7F0A9CE18F4A84400BBF7D5 /* Tweet.m in Sources */,
+				F795866318F8A037009A95D2 /* LoginTableViewController.m in Sources */,
 				F7D2422118F768F700E6305A /* UIAlertView+AFNetworking.m in Sources */,
 				F7D2420518F768E900E6305A /* AFHTTPRequestOperationManager.m in Sources */,
 				F7D2420818F768E900E6305A /* AFSecurityPolicy.m in Sources */,

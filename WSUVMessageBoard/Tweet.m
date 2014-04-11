@@ -24,16 +24,15 @@
 
 -(id)initWithTweetID:(NSInteger)tweet_ID
             Username:(NSString*) username
-           //IsDeleted:(BOOL)isdeleted
+           IsDeleted:(BOOL)isdeleted
                Tweet:(NSString*)tweet
                 Date:(NSDate*) date{
-    if (self = [super init]) {
+    self = [self init];
         self.tweet_id = tweet_ID;
 		self.username = username;
-		//self.isdeleted = isdeleted;
+		self.isdeleted = isdeleted;
 		self.tweet = tweet;
 		self.date = date;
-    }
     
     return self;
 }

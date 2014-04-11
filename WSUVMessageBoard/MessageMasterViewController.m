@@ -38,6 +38,7 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (MessageDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    _objects = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,7 +48,7 @@
 }
 
 -(void)refreshTweets {
-    MessageAppDelegate *appDelegate = [[MessageAppDelegate alloc] init];
+    MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
@@ -64,11 +65,33 @@
       parameters:parameters
          success: ^(NSURLSessionDataTask *task, id responseObject) {
              NSMutableArray *arrayOfDicts = [responseObject objectForKey:@"tweets"];
-             appDelegate.tweets = arrayOfDicts.mutableCopy;
-             Tweet *test = [appDelegate.tweets objectAtIndex:0];
+             //NSArray *temp = arrayOfDicts.mutableCopy;
              
-             NSLog(@"%lu",(unsigned long)[appDelegate.tweets count]);
-             NSLog(@"%@",test);
+             for (NSDictionary *t in arrayOfDicts) {
+                 NSInteger tInt = [[t objectForKey:@"tweet_id"] integerValue];
+                 NSString *username = [t objectForKey:@"username"];
+                 BOOL b;
+                 if ([t objectForKey:@"isdeleted"]){
+                     b = YES;
+                 }else{
+                     b = NO;
+                 }
+                 NSString *tw = [t objectForKey:@"tweet"];
+                 NSString *d = [t objectForKey:@"time_stamp"];
+                 NSDate *date = [dateFormatter dateFromString:d];
+                 Tweet *tweet = [[Tweet alloc] initWithTweetID:tInt
+                                                      Username:username
+                                                     IsDeleted:b Tweet:tw Date:date];
+                 [self tweetAttributedStringFromTweet:tweet];
+                 [_objects insertObject:tweet atIndex:0];
+                 
+                 
+             }
+             //appDelegate.tweets = arrayOfDicts.mutableCopy;
+             //Tweet *test = [appDelegate.tweets objectAtIndex:0];
+             //[self.tableView reloadData];
+             //NSLog(@"%lu",(unsigned long)[appDelegate.tweets count]);
+             //NSLog(@"%@",test);
              //
              // Add new (sorted) tweets to head of appDelegate.tweets array.
              // If implementing delete, some older tweets may be purged.
@@ -152,7 +175,7 @@
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    Tweet *tweet = appDelegate.tweets[indexPath.row];
+    Tweet *tweet = _objects[indexPath.row];
     NSAttributedString *tweetAttributedString =
     [self tweetAttributedStringFromTweet:tweet];
     CGRect tweetRect =
@@ -171,7 +194,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                     forIndexPath:indexPath];
     MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    Tweet *tweet = appDelegate.tweets[indexPath.row];
+    Tweet *tweet = _objects[indexPath.row];
     NSAttributedString *tweetAttributedString =
     [self tweetAttributedStringFromTweet:tweet];
     cell.textLabel.numberOfLines = 0; // multi-line label
