@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LoginDelegate <NSObject>
+
+-(void)didCancelLogin;
+-(void)didLogin;
+@end
+
 @interface LoginTableViewController : UITableViewController
+
+@property (nonatomic) id loginDelegate;
+
+- (IBAction)loginButtonPressed:(id)sender;
+- (IBAction)registerButtonPressed:(id)sender;
+
 
 @end

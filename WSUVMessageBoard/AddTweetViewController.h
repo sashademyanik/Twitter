@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AddTweetDelegate <NSObject>
+@optional
+-(void)didCancelAddTweet;
+-(void)didAddTweet;
+@end
+
 @interface AddTweetViewController : UITableViewController
+
+@property (nonatomic) id addTweetDelegate;
+
 
 @end

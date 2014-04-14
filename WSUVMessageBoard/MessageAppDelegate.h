@@ -15,6 +15,10 @@
 
 @property (strong, nonatomic) NSMutableArray *tweets;
 
+@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *password;
+@property (strong, nonatomic) NSString *session_token;
+
 -(NSDate*)lastTweetDate;
 
 @end

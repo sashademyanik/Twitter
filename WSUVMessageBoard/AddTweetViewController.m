@@ -7,8 +7,10 @@
 //
 
 #import "AddTweetViewController.h"
+#import "LoginTableViewController.h"
+#import "MessageAppDelegate.h"
 
-@interface AddTweetViewController ()
+@interface AddTweetViewController () <LoginDelegate>
 
 @end
 
@@ -23,9 +25,17 @@
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    if (appDelegate.username == nil){
+        [self performSegueWithIdentifier:@"loginToAddTweetSegue" sender:self];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -41,7 +51,7 @@
 }
 
 #pragma mark - Table view data source
-
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 #warning Potentially incomplete method implementation.
@@ -55,7 +65,7 @@
     // Return the number of rows in the section.
     return 0;
 }
-
+*/
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -105,15 +115,20 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"loginToAddTweetSegue"]) {
+        UINavigationController *navController =
+        (UINavigationController*) segue.destinationViewController;
+        LoginTableViewController *LoginController =
+        (LoginTableViewController*) navController.topViewController;
+        LoginController.loginDelegate = self;
+    }
 }
-*/
+
 
 @end

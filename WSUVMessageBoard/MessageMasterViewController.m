@@ -10,11 +10,15 @@
 #import "MessageAppDelegate.h"
 #import "MessageDetailViewController.h"
 #import "Tweet.h"
+#import "AddTweetViewController.h"
+#import "LoginTableViewController.h"
 
 #define BaseURLString @"https://bend.encs.vancouver.wsu.edu/~wcochran/cgi-bin/"
 
-@interface MessageMasterViewController () {
+@interface MessageMasterViewController () <AddTweetDelegate, LoginDelegate> {
+    MessageAppDelegate *delegate;
     NSMutableArray *_objects;
+    AFHTTPSessionManager *manager;
 }
 @end
 
@@ -39,6 +43,10 @@
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (MessageDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     _objects = [[NSMutableArray alloc] init];
+    delegate = [[UIApplication sharedApplication] delegate];
+    NSURL *baseURL = [NSURL URLWithString:BaseURLString];
+    manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,18 +56,16 @@
 }
 
 -(void)refreshTweets {
-    MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    //MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"PST"];
-    NSDate *lastTweetDate = [appDelegate lastTweetDate];
+    NSDate *lastTweetDate = [delegate lastTweetDate];
     NSString *dateStr = [dateFormatter stringFromDate:lastTweetDate];
     NSDictionary *parameters = @{@"date" : dateStr};
     
-    NSURL *baseURL = [NSURL URLWithString:BaseURLString];
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
     
     [manager GET:@"get-tweets.cgi"
       parameters:parameters
@@ -68,44 +74,46 @@
              //NSArray *temp = arrayOfDicts.mutableCopy;
              
              for (NSDictionary *t in arrayOfDicts) {
-                 NSInteger tInt = [[t objectForKey:@"tweet_id"] integerValue];
-                 NSString *username = [t objectForKey:@"username"];
                  BOOL b;
                  if ([t objectForKey:@"isdeleted"]){
                      b = YES;
                  }else{
                      b = NO;
                  }
-                 NSString *tw = [t objectForKey:@"tweet"];
-                 NSString *d = [t objectForKey:@"time_stamp"];
-                 NSDate *date = [dateFormatter dateFromString:d];
-                 Tweet *tweet = [[Tweet alloc] initWithTweetID:tInt
+                 //if (b == NO){
+                     NSInteger tInt = [[t objectForKey:@"tweet_id"] integerValue];
+                     NSString *username = [t objectForKey:@"username"];
+                 
+                     NSString *tw = [t objectForKey:@"tweet"];
+                     NSString *d = [t objectForKey:@"time_stamp"];
+                     NSDate *date = [dateFormatter dateFromString:d];
+                     Tweet *tweet = [[Tweet alloc] initWithTweetID:tInt
                                                       Username:username
                                                      IsDeleted:b Tweet:tw Date:date];
-                 [self tweetAttributedStringFromTweet:tweet];
-                 [_objects insertObject:tweet atIndex:0];
+                     [self tweetAttributedStringFromTweet:tweet];
+                     [delegate.tweets insertObject:tweet atIndex:0];
+                     [_objects insertObject:tweet atIndex:0];
+                 //}
                  
                  
              }
-             //appDelegate.tweets = arrayOfDicts.mutableCopy;
-             //Tweet *test = [appDelegate.tweets objectAtIndex:0];
-             //[self.tableView reloadData];
-             //NSLog(@"%lu",(unsigned long)[appDelegate.tweets count]);
-             //NSLog(@"%@",test);
-             //
-             // Add new (sorted) tweets to head of appDelegate.tweets array.
-             // If implementing delete, some older tweets may be purged.
-             // Invoke [self.tableView reloadData] if any changes.
-             //
+
              [self.tableView reloadData];
              [self.refreshControl endRefreshing];
              
          } failure:^(NSURLSessionDataTask *task, NSError *error) {
              NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
              const int statuscode = response.statusCode;
-             //
-             // Display AlertView with appropriate error message.
-             //
+             NSString *scode = [NSString stringWithFormat:@"%d",statuscode];
+             NSString *responseString = [[NSString alloc] initWithData:(NSData*)response encoding:NSUTF8StringEncoding];
+			 
+			 UIAlertView *message = [[UIAlertView alloc] initWithTitle:scode
+                                                               message:responseString
+                                                              delegate:self
+                                                     cancelButtonTitle:@"Sure?"
+                                                     otherButtonTitles:nil];
+             
+			 [message show];
              [self.refreshControl endRefreshing];
          }];
 }
@@ -114,9 +122,49 @@
     [self refreshTweets];
 }
 
+#pragma Login Stuff
+
+-(void)didCancelLogin{
+    
+}
+
+-(void)didLogin{
+    
+    NSDictionary *parameters = @{@"username":delegate.username, @"password":delegate.password, @"action" : @"login"};
+    
+    [manager POST:@"login.cgi"
+      parameters:parameters
+         success: ^(NSURLSessionDataTask *task, id responseObject) {
+             NSMutableArray *arrayOfDicts = [responseObject objectForKey:@"tweets"];
+             //
+             // Add new (sorted) tweets to head of appDelegate.tweets array.
+             // If implementing delete, some older tweets may be purged.
+             // Invoke [self.tableView reloadData] if any changes.
+             //
+             [self.refreshControl endRefreshing];
+         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+             NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+             const int statuscode = response.statusCode;
+             NSString *scode = [NSString stringWithFormat:@"%d",statuscode];
+             NSString *responseString = [[NSString alloc] initWithData:(NSData*)response encoding:NSUTF8StringEncoding];
+			 
+			 UIAlertView *message = [[UIAlertView alloc] initWithTitle:scode
+                                                               message:responseString
+                                                              delegate:self
+                                                     cancelButtonTitle:@"Sure?"
+                                                     otherButtonTitles:nil];
+             
+			 [message show];
+             [self.refreshControl endRefreshing];
+         }];
+}
+
 -(void)didAddTweet {
     [self.refreshControl beginRefreshing];
     [self refreshTweets];
+}
+-(void)didCancelAddTweet{
+    
 }
 
 - (void)insertNewObject:(id)sender
@@ -124,9 +172,10 @@
     if (!_objects) {
         _objects = [[NSMutableArray alloc] init];
     }
+    [self performSegueWithIdentifier:@"AddTweetSegue" sender:self];
     [_objects insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    //[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 -(NSAttributedString*)tweetAttributedStringFromTweet:(Tweet*)tweet {
@@ -174,8 +223,8 @@
 
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    Tweet *tweet = _objects[indexPath.row];
+    //MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    Tweet *tweet = delegate.tweets[indexPath.row];
     NSAttributedString *tweetAttributedString =
     [self tweetAttributedStringFromTweet:tweet];
     CGRect tweetRect =
@@ -188,13 +237,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //NSLog(@"I am here");
     static NSString *CellIdentifier = @"TwitterCell";
     UITableViewCell *cell =
     [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                     forIndexPath:indexPath];
-    MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    Tweet *tweet = _objects[indexPath.row];
+    //MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    Tweet *tweet = delegate.tweets[indexPath.row];
     NSAttributedString *tweetAttributedString =
     [self tweetAttributedStringFromTweet:tweet];
     cell.textLabel.numberOfLines = 0; // multi-line label
@@ -257,6 +305,15 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSDate *object = _objects[indexPath.row];
         [[segue destinationViewController] setDetailItem:object];
+    }
+    if ([segue.identifier isEqualToString:@"AddTweetSegue"]) {
+        UINavigationController *navController =
+        (UINavigationController*) segue.destinationViewController;
+        AddTweetViewController *addTweetController =
+        (AddTweetViewController*) navController.topViewController;
+        addTweetController.addTweetDelegate = self;
+    } else if ([segue.identifier isEqualToString:@"LoginSegue"]) {
+        // no prep needed here
     }
 }
 

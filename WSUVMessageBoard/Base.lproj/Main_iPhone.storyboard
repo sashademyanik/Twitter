@@ -69,8 +69,8 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="L52-AW-z7O" kind="modal" identifier="add tweet segue" id="noi-xa-Ztv"/>
-                        <segue destination="mSq-Ai-yig" kind="modal" identifier="login segue" id="zls-Li-2Vl"/>
+                        <segue destination="L52-AW-z7O" kind="modal" identifier="AddTweetSegue" id="noi-xa-Ztv"/>
+                        <segue destination="mSq-Ai-yig" kind="modal" identifier="loginSegue" id="zls-Li-2Vl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
@@ -127,6 +127,9 @@
                                                     <state key="normal" title="Login">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="loginButtonPressed:" destination="sFG-lB-ExI" eventType="touchUpInside" id="1EE-Ba-nEU"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vt-MO-Oba">
                                                     <rect key="frame" x="164" y="140" width="127" height="30"/>
@@ -135,6 +138,9 @@
                                                     <state key="normal" title="Register">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="registerButtonPressed:" destination="sFG-lB-ExI" eventType="touchUpInside" id="5qm-oZ-Mp0"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -197,7 +203,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Edit Tweet Controller" id="fl5-mN-vgB"/>
                     <connections>
-                        <segue destination="mSq-Ai-yig" kind="modal" id="ZqH-qv-Djs"/>
+                        <segue destination="mSq-Ai-yig" kind="modal" identifier="loginToAddTweetSegue" id="ZqH-qv-Djs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQC-Zq-dFU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -241,6 +247,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="zls-Li-2Vl"/>
+        <segue reference="ZqH-qv-Djs"/>
     </inferredMetricsTieBreakers>
 </document>
