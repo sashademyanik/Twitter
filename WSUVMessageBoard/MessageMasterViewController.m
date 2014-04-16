@@ -37,7 +37,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(loginAction:)];
+    self.navigationItem.leftBarButtonItem = loginButton;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
@@ -47,6 +48,7 @@
     NSURL *baseURL = [NSURL URLWithString:BaseURLString];
     manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self refreshTweets];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,12 +77,13 @@
              
              for (NSDictionary *t in arrayOfDicts) {
                  BOOL b;
-                 if ([t objectForKey:@"isdeleted"]){
+                 if ([[t objectForKey:@"isdeleted"] intValue] == 1){
                      b = YES;
                  }else{
                      b = NO;
                  }
-                 //if (b == NO){
+                 
+                 if (b == NO){
                      NSInteger tInt = [[t objectForKey:@"tweet_id"] integerValue];
                      NSString *username = [t objectForKey:@"username"];
                  
@@ -93,7 +96,7 @@
                      [self tweetAttributedStringFromTweet:tweet];
                      [delegate.tweets insertObject:tweet atIndex:0];
                      [_objects insertObject:tweet atIndex:0];
-                 //}
+                 }
                  
                  
              }
@@ -122,42 +125,87 @@
     [self refreshTweets];
 }
 
-#pragma Login Stuff
+#pragma mark - Login Stuff
+
+-(void)didPressLogin:(NSDictionary *)parameters{
+}
+
+-(void)didPressRegister:(NSDictionary *)parameters{
+}
 
 -(void)didCancelLogin{
-    
+    NSLog(@"Cancelled Login");
 }
 
 -(void)didLogin{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                      message:@"You Logged in!"
+                                                     delegate:self
+                                            cancelButtonTitle:@"Thanks"
+                                            otherButtonTitles:nil];
     
-    NSDictionary *parameters = @{@"username":delegate.username, @"password":delegate.password, @"action" : @"login"};
-    
-    [manager POST:@"login.cgi"
-      parameters:parameters
-         success: ^(NSURLSessionDataTask *task, id responseObject) {
-             NSMutableArray *arrayOfDicts = [responseObject objectForKey:@"tweets"];
-             //
-             // Add new (sorted) tweets to head of appDelegate.tweets array.
-             // If implementing delete, some older tweets may be purged.
-             // Invoke [self.tableView reloadData] if any changes.
-             //
-             [self.refreshControl endRefreshing];
-         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-             NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-             const int statuscode = response.statusCode;
-             NSString *scode = [NSString stringWithFormat:@"%d",statuscode];
-             NSString *responseString = [[NSString alloc] initWithData:(NSData*)response encoding:NSUTF8StringEncoding];
-			 
-			 UIAlertView *message = [[UIAlertView alloc] initWithTitle:scode
-                                                               message:responseString
-                                                              delegate:self
-                                                     cancelButtonTitle:@"Sure?"
-                                                     otherButtonTitles:nil];
-             
-			 [message show];
-             [self.refreshControl endRefreshing];
-         }];
+    [message show];
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"alertView:clickedButtonAtIndex: %d",buttonIndex);
+    if(buttonIndex == 1){
+        delegate.loginVar = 0;
+        NSDictionary *parameters = @{@"username" : delegate.username, @"password" : delegate.password, @"action" : @"logout"};
+        [manager POST:@"login.cgi"
+           parameters:parameters
+              success: ^(NSURLSessionDataTask *task, id responseObject) {
+                  NSString *session = [responseObject objectForKey:@"session_token"];
+                  
+                  delegate.username = nil;
+                  delegate.password = nil;
+                  delegate.session_token = session;
+                  delegate.loginVar = 0;
+              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+                  const int statuscode = response.statusCode;
+                  NSString *scode = [@(statuscode) stringValue];
+                  NSString *responseString;
+                  if (statuscode == 500){
+                      responseString = @"Internal Server Error";
+                  }else if( statuscode == 400 ){
+                      responseString = @"Bad Request";
+                  }else if (statuscode == 401){
+                      responseString = @"Unauthorized";
+                  }else{
+                      responseString = @"No such User";
+                  }
+                  
+                  
+                  
+                  UIAlertView *message = [[UIAlertView alloc] initWithTitle:scode
+                                                                    message:responseString
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Ok"
+                                                          otherButtonTitles:nil];
+                  
+                  [message show];
+                  [self.refreshControl endRefreshing];
+              }];
+
+    }
+}
+
+-(void)loginAction:(id)sender{
+    if (delegate.loginVar == 0){
+        [self performSegueWithIdentifier:@"loginSegue" sender:self];
+    }else{
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Logging Out"
+                                                          message:@"Are you sure you want to log out?"
+                                                         delegate:self
+                                                cancelButtonTitle:@"No"
+                                                otherButtonTitles:@"Yes",nil];
+        
+        [message show];
+    }
+}
+
+#pragma mark - Add Tweet
 
 -(void)didAddTweet {
     [self.refreshControl beginRefreshing];
@@ -172,10 +220,21 @@
     if (!_objects) {
         _objects = [[NSMutableArray alloc] init];
     }
-    [self performSegueWithIdentifier:@"AddTweetSegue" sender:self];
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    //[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (delegate.loginVar == 1){
+        [self performSegueWithIdentifier:@"AddTweetSegue" sender:self];
+        //[_objects insertObject:[NSDate date] atIndex:0];
+        //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        //[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Add Tweet Error"
+                                                          message:@"You are not logged in! Please login to add tweet"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Got it"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+
+    }
 }
 
 -(NSAttributedString*)tweetAttributedStringFromTweet:(Tweet*)tweet {
@@ -267,9 +326,61 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"editing");
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //[_objects removeObjectAtIndex:indexPath.row];
+        
+        
+        //if ([delegate.username isEqualToString:[[_objects objectAtIndex:indexPath.row] username]]){
+        Tweet *tweet = delegate.tweets[indexPath.row];
+        
+        NSNumber *tid = [NSNumber numberWithInt:tweet.tweet_id];
+        
+        
+        NSDictionary *parameters = @{@"username" : delegate.username, @"session_token" : delegate.session_token, @"tweet_id" : tid};
+            
+            [manager POST:@"del-tweet.cgi"
+               parameters:parameters
+                  success: ^(NSURLSessionDataTask *task, id responseObject) {
+                      //NSString *tweet = [responseObject objectForKey:@"tweet"];
+                      
+                      NSLog(@"Deleting");
+                      //[delegate.tweets removeObjectAtIndex:indexPath.row];
+                      [_objects removeObjectAtIndex:indexPath.row];
+                      [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                      //[self.tableView reloadData];
+                      [self.refreshControl endRefreshing];
+                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                      NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+                      const int statuscode = response.statusCode;
+                      NSString *scode = [@(statuscode) stringValue];
+                      NSString *responseString;
+                      if (statuscode == 500){
+                          responseString = @"Internal Server Error: Woops";
+                      }else if( statuscode == 400 ){
+                          responseString = @"Bad Request: Params not provided";
+                      }else if (statuscode == 401){
+                          responseString = @"Unauthorized";
+                      }else if (statuscode == 403){
+                          responseString = @"Forbidded: Not the user's tweet";
+                      }else{
+                          responseString = @"No such User";
+                      }
+                      
+                      
+                      
+                      UIAlertView *message = [[UIAlertView alloc] initWithTitle:scode
+                                                                        message:responseString
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"Ok"
+                                                              otherButtonTitles:nil];
+                      
+                      [message show];
+                      [self.refreshControl endRefreshing];
+                  }];
+        //}
+        
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
@@ -309,9 +420,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([segue.identifier isEqualToString:@"AddTweetSegue"]) {
         UINavigationController *navController =
         (UINavigationController*) segue.destinationViewController;
-        AddTweetViewController *addTweetController =
+        _addTweetController =
         (AddTweetViewController*) navController.topViewController;
-        addTweetController.addTweetDelegate = self;
+        _addTweetController.addTweetDelegate = self;
     } else if ([segue.identifier isEqualToString:@"LoginSegue"]) {
         // no prep needed here
     }

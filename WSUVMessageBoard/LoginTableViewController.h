@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @protocol LoginDelegate <NSObject>
-
+@optional
 -(void)didCancelLogin;
+-(void)didPressLogin:(NSDictionary*)parameters;
+-(void)didPressRegister:(NSDictionary*)parameters;
 -(void)didLogin;
 @end
 
@@ -18,8 +20,14 @@
 
 @property (nonatomic) id loginDelegate;
 
+
+
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
+
 - (IBAction)loginButtonPressed:(id)sender;
 - (IBAction)registerButtonPressed:(id)sender;
-
+-(void)loginFunction:(NSString*)flag;
 
 @end

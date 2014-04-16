@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class MessageDetailViewController;
+@class LoginTableViewController;
+@class AddTweetViewController;
 
 @interface MessageMasterViewController : UITableViewController
 
 @property (strong, nonatomic) MessageDetailViewController *detailViewController;
+
+@property (nonatomic) AddTweetViewController *addTweetController;
 
 @end

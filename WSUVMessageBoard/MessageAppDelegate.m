@@ -22,6 +22,7 @@
         self.tweets = [[NSMutableArray alloc] init];
     }
     self.tweets = [[NSMutableArray alloc] init];
+    self.loginVar = 0;
     return YES;
 }
 							

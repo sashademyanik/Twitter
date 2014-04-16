@@ -9,12 +9,15 @@
 #import "AddTweetViewController.h"
 #import "LoginTableViewController.h"
 #import "MessageAppDelegate.h"
-
-@interface AddTweetViewController () <LoginDelegate>
+#define BaseURLString @"https://bend.encs.vancouver.wsu.edu/~wcochran/cgi-bin/"
+@interface AddTweetViewController ()
 
 @end
 
-@implementation AddTweetViewController
+@implementation AddTweetViewController{
+    AFHTTPSessionManager *manager;
+    BOOL tooManyChars;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,16 +29,22 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    if (appDelegate.username == nil){
-        [self performSegueWithIdentifier:@"loginToAddTweetSegue" sender:self];
-    }
+    //MessageAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    self.tweetTextField.delegate = self;
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButton:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAdding)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    NSURL *baseURL = [NSURL URLWithString:BaseURLString];
+    manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    tooManyChars = NO;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -44,10 +53,78 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+-(void)textViewDidChange:(UITextView *) textView {
+    int thing = [self.tweetTextField.text length];
+    self.charactersTyped.text = [NSString stringWithFormat:@"%d/140",thing];
+    if (thing > 140){
+        tooManyChars = YES;
+    }else{
+        tooManyChars = NO;
+    }
+}
+
+-(void)doneAdding{
+    if (tooManyChars) {
+        
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                      message:@"Too many characters! Only 140 characters allowed!"
+                                                     delegate:self
+                                            cancelButtonTitle:@"Fine..."
+                                            otherButtonTitles:nil];
+    
+        [message show];
+    }else{
+
+    MessageAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSDictionary *parameters = @{@"username" : delegate.username, @"session_token" : delegate.session_token, @"tweet" : self.tweetTextField.text};
+    
+    [manager POST:@"add-tweet.cgi"
+       parameters:parameters
+          success: ^(NSURLSessionDataTask *task, id responseObject) {
+              NSString *tweet = [responseObject objectForKey:@"tweet"];
+              
+              NSLog(@"Tweeting");
+              
+              
+          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+              NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+              const int statuscode = response.statusCode;
+              NSString *scode = [@(statuscode) stringValue];
+              NSString *responseString;
+              if (statuscode == 500){
+                  responseString = @"Internal Server Error: Woops";
+              }else if( statuscode == 400 ){
+                  responseString = @"Bad Request: Params not provided";
+              }else if (statuscode == 401){
+                  responseString = @"Unauthorized";
+              }else{
+                  responseString = @"No such User";
+              }
+              
+              
+              
+              UIAlertView *message = [[UIAlertView alloc] initWithTitle:scode
+                                                                message:responseString
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Sure?"
+                                                      otherButtonTitles:nil];
+              
+              [message show];
+              [self.refreshControl endRefreshing];
+          }];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)cancelButton:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -121,13 +198,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"loginToAddTweetSegue"]) {
-        UINavigationController *navController =
-        (UINavigationController*) segue.destinationViewController;
-        LoginTableViewController *LoginController =
-        (LoginTableViewController*) navController.topViewController;
-        LoginController.loginDelegate = self;
-    }
+    
 }
 
 

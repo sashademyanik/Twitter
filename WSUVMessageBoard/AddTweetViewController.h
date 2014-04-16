@@ -14,9 +14,12 @@
 -(void)didAddTweet;
 @end
 
-@interface AddTweetViewController : UITableViewController
+@interface AddTweetViewController : UITableViewController <UITextViewDelegate>
 
 @property (nonatomic) id addTweetDelegate;
+
+@property (weak, nonatomic) IBOutlet UILabel *charactersTyped;
+@property (weak, nonatomic) IBOutlet UITextView *tweetTextField;
 
 
 @end
