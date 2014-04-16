@@ -37,11 +37,7 @@
     NSURL *baseURL = [NSURL URLWithString:BaseURLString];
     manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    _logged = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,9 +51,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)sendLogin{
+    [self.loginDelegate didLogin];
+}
+
 - (IBAction)loginButtonPressed:(id)sender {
     MessageAppDelegate *delegate = [[UIApplication sharedApplication]delegate];
-    
     NSLog(@"LoginButtonPressed");
     NSString *uname = self.usernameTextField.text;
     NSString *pword = self.passwordTextField.text;
@@ -73,7 +72,8 @@
               delegate.password = pword;
               delegate.session_token = session;
               delegate.loginVar = 1;
-              [self.loginDelegate didLogin];
+              
+              self.logged = YES;
               
             [self dismissView];
           } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -102,7 +102,7 @@
               [message show];
               [self.refreshControl endRefreshing];
           }];
-    
+    [self sendLogin];
 
 }
 

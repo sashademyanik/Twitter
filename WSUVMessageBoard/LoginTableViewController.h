@@ -18,16 +18,14 @@
 
 @interface LoginTableViewController : UITableViewController
 
-@property (nonatomic) id loginDelegate;
-
-
+@property (nonatomic) id<LoginDelegate> loginDelegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
+@property (nonatomic) BOOL logged;
 
 - (IBAction)loginButtonPressed:(id)sender;
 - (IBAction)registerButtonPressed:(id)sender;
--(void)loginFunction:(NSString*)flag;
-
+-(void)sendLogin;
 @end

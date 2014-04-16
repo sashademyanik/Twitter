@@ -85,7 +85,7 @@
               NSString *tweet = [responseObject objectForKey:@"tweet"];
               
               NSLog(@"Tweeting");
-              
+              [self.addTweetDelegate didAddTweet];
               
           } failure:^(NSURLSessionDataTask *task, NSError *error) {
               NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
